@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CombatStateTracker.Combatants
 {
-	public interface IConidtion
+	public interface ICondition
 	{
 		string Name { get; set; }
 		int RoundsLeft { get; set; }

@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using ExtendedXmlSerializer;
 using CombatStateTracker.Combatants;
+using ExtendedXmlSerializer.Configuration;
+using ExtendedXmlSerializer.ExtensionModel.Xml;
 
 namespace CombatStateTracker
 {
@@ -13,7 +16,7 @@ namespace CombatStateTracker
 	{
 		public uint CurrentRound { get; set; }
 		public string Name { get; set; }
-		public List<Combatant> Combatants;
+		public List<Combatant> Combatants { get; set; }
 
 		public CombatState()
 		{
@@ -49,26 +52,35 @@ namespace CombatStateTracker
 		private const string mNamePrefix = "CombatState_";
 		public static void SerializeToXml(CombatState state)
 		{
-			// XML Serializer for the object
-			var serializer = new XmlSerializer(state.GetType());
+			// Setup extend serializer
+			var serializer = new ConfigurationContainer()
+					.EnableImplicitTypingFromNested<CombatStateTracker.CombatState>()
+					.Create();
 
 			// XML Writer 
 			var writer = XmlWriter.Create(state.Name + "_" + state.CurrentRound + ".xml");
 
-			// Write the file
+			// Serialize
 			serializer.Serialize(writer, state);
+
+			// Finalize
+			writer.Flush();
+			writer.Dispose();
 		}
 
 		public static CombatState DeserializeFromXml(string fileName)
 		{
 			// XML Serializer for the object
-			var serializer = new XmlSerializer(typeof(CombatState));
+			var serializer = new ConfigurationContainer()
+					.EnableImplicitTypingFromNested<CombatStateTracker.CombatState>()
+					.Create();
 
 			// XML Reader
-			var reader = new XmlTextReader(fileName);
-
-			// Deserialize
-			return serializer.Deserialize(reader) as CombatState;
+			using (var reader = new XmlTextReader(fileName))
+			{
+				// Deserialize
+				return serializer.Deserialize(reader) as CombatState;
+			}
 		}
 	}
 	#endregion

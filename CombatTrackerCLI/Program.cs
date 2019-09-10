@@ -14,13 +14,16 @@ namespace CombatTrackerCLI
 		{
 			var state = new CombatState("TestCombat", 1);
 			state.Combatants.Add(new CombatStateTracker.Combatants.Combatant() { Name="Ork", Wounds=12, WoundsMax=12});
+			state.Combatants.Add(new CombatStateTracker.Combatants.Combatant() { Name = "Guardsman", Wounds = 7, WoundsMax = 7 });
 			Console.WriteLine($"Serializing state: \n{state.ToString()}");
 			CombatStateSerializer.SerializeToXml(state);
 			Console.WriteLine("Success!");
-			string fileName = "CombatState_TestCombat_1.xml";
+			string fileName = "TestCombat_1.xml";
 			Console.WriteLine($"Deserializing {fileName}...");
 			var stateReload = CombatStateSerializer.DeserializeFromXml(fileName);
 			Console.WriteLine($"Success! Deserialized State: \n{stateReload.ToString()}.");
+
+			// Keep console alive
 			Console.ReadLine();
 		}
 	}

@@ -3,42 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace CombatStateTracker.Combatants
 {
 	public enum HitLocations { Head = 0, ArmLeft = 1, ArmRight = 2, Body = 3, LegLeft = 4, LegRight = 5 };
 
-	class Armor
+	public class Armor
 	{
-		uint Head { get; set; }
-		uint ArmLeft { get; set; }
-		uint ArmRight { get; set; }
-		uint Body { get; set; }
-		uint LegLeft { get; set; }
-		uint LegRight { get; set; }
-
-		uint HitLocation2AP (HitLocations loc)
-		{
-			switch (loc)
+		public Dictionary<HitLocations, uint> Location2Armor {get; private set;}
+		private uint? _all;
+		public uint? All
+		{ get
 			{
-				case HitLocations.Head: return Head;
-				case HitLocations.ArmLeft: return ArmLeft;
-				case HitLocations.ArmRight: return ArmRight;
-				case HitLocations.Body: return Body;
-				case HitLocations.LegLeft: return LegLeft;
-				case HitLocations.LegRight: return LegRight;
-				default: return Body;
+				return _all;
+			}
+			set
+			{
+				_all = value;
+				if (value != null)
+				{
+					Location2Armor[HitLocations.Head] = (uint)value;
+					Location2Armor[HitLocations.ArmLeft] = (uint)value;
+					Location2Armor[HitLocations.ArmRight] = (uint)value;
+					Location2Armor[HitLocations.Body] = (uint)value;
+					Location2Armor[HitLocations.LegLeft] = (uint)value;
+					Location2Armor[HitLocations.LegRight] = (uint)value;
+				}
 			}
 		}
 
-		void SetAllAP (uint ap)
+		public Armor ()
 		{
-			Head = ap;
-			ArmLeft = ap;
-			ArmRight = ap;
-			Body = ap;
-			LegLeft = ap;
-			LegRight = ap;
+			All = null;
+			Location2Armor = new Dictionary<HitLocations, uint>(6)
+				{
+					{ HitLocations.Head, 0},
+					{ HitLocations.ArmLeft, 0},
+					{ HitLocations.ArmRight, 0},
+					{ HitLocations.Body, 0},
+					{ HitLocations.LegLeft, 0},
+					{ HitLocations.LegRight, 0},
+				};
 		}
 	}
 }
