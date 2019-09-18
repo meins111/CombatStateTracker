@@ -54,7 +54,7 @@ namespace CombatStateTracker
 		{
 			// Setup extend serializer
 			var serializer = new ConfigurationContainer()
-					.EnableImplicitTypingFromNested<CombatStateTracker.CombatState>()
+					.EnableImplicitTypingFromNested<CombatState>()
 					.Create();
 
 			// XML Writer 
@@ -72,7 +72,7 @@ namespace CombatStateTracker
 		{
 			// XML Serializer for the object
 			var serializer = new ConfigurationContainer()
-					.EnableImplicitTypingFromNested<CombatStateTracker.CombatState>()
+					.EnableImplicitTypingFromNested<CombatState>()
 					.Create();
 
 			// XML Reader

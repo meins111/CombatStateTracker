@@ -54,8 +54,11 @@
   <ItemGroup>
     <Compile Include="Combatants\Armor.cs" />
     <Compile Include="Combatants\Combatant.cs" />
+    <Compile Include="CombatStateTracker.cs" />
     <Compile Include="Combatants\ICondition.cs" />
+    <Compile Include="Combatants\IDamageOverTime.cs" />
     <Compile Include="CombatState.cs" />
+    <Compile Include="Dice\DiceRoller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

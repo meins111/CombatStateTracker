@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CliCombatantExtensions.cs" />
+    <Compile Include="CombatantCliMenu.cs" />
+    <Compile Include="CombatStateCliMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
