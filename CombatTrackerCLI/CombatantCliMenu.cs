@@ -11,6 +11,9 @@ namespace CombatTrackerCLI
 	{
 		public static void CombatantDialog(CombatStateTracker.Combatants.Combatant combatant)
 		{
+			Console.WriteLine("\n>>> Combatant Menu: Select one of the following options: <<<");
+			Console.WriteLine("\t> ");
+
 			// TODO: Implement change dialogue
 			Console.WriteLine("NYI");
 		}

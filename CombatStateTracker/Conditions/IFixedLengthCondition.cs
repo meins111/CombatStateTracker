@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CombatStateTracker.Combatants
+namespace CombatStateTracker.Conditions
 {
-	public interface ICondition
+	public interface IFixedLengthCondition : ICondition
 	{
-		string Name { get; set; }
 		int RoundsLeft { get; set; }
+		int MaxRounds { get; set; }
+		void ResetDuration();
 	}
 }

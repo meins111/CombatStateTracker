@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using CombatStateTracker.Conditions;
 
 namespace CombatStateTracker.Combatants
 {
@@ -14,6 +15,7 @@ namespace CombatStateTracker.Combatants
 		public uint Dodge { get; set; }
 		public uint Parry { get; set; }
 		public int WoundsMax {get; set;}
+		public uint TTB { get; set; }
 		public Armor Armor { get; set; }
 		public uint? UTB { get; set; }
 		public string Weapon { get; set; }
@@ -28,23 +30,17 @@ namespace CombatStateTracker.Combatants
 			Dodge = 0;
 			Parry = 0;
 			UTB = null;
+			TTB = 0;
 		}
 
-		public override string ToString()
+		public string ToString(bool printArmor = false, bool printConditions = true)
 		{
 			var builder = new StringBuilder();
 			builder.AppendLine($"Combatant: {Name}");
 			builder.AppendLine($"\tWounds: {Wounds}/{WoundsMax}");
 			builder.AppendLine($"\tDodge: {Dodge}\tParry: {Parry}");
-			builder.AppendLine("\tArmor:");
-			builder.AppendLine($"\t\t{Armor.Location2Armor[HitLocations.Head]}");
-			builder.AppendLine($"\t{Armor.Location2Armor[HitLocations.ArmLeft]}\t\t{Armor.Location2Armor[HitLocations.ArmRight]}");
-			builder.AppendLine($"\t\t{Armor.Location2Armor[HitLocations.Body]}");
-			builder.AppendLine($"\t{Armor.Location2Armor[HitLocations.LegLeft]}\t\t{Armor.Location2Armor[HitLocations.LegRight]}");
-			if (Conditions.Count > 0)
-			{
-				builder.AppendLine($"\tConditions: {String.Join(",", Name)}");
-			}
+			if (printArmor) Armor.ToString();
+			if (printConditions && Conditions.Count>0) builder.AppendLine($"Conditions: {String.Join(", ", Conditions.Select(x => x.Print()))}");
 			return builder.ToString();
 		}
 	}

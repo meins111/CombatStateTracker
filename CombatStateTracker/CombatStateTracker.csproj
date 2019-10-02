@@ -54,9 +54,13 @@
   <ItemGroup>
     <Compile Include="Combatants\Armor.cs" />
     <Compile Include="Combatants\Combatant.cs" />
+    <Compile Include="Conditions\Bleed.cs" />
+    <Compile Include="Conditions\Burn.cs" />
+    <Compile Include="Conditions\IDamage.cs" />
+    <Compile Include="Conditions\IVarLengthCondition.cs" />
     <Compile Include="CombatStateTracker.cs" />
-    <Compile Include="Combatants\ICondition.cs" />
-    <Compile Include="Combatants\IDamageOverTime.cs" />
+    <Compile Include="Conditions\ICondition.cs" />
+    <Compile Include="Conditions\IFixedLengthCondition.cs" />
     <Compile Include="CombatState.cs" />
     <Compile Include="Dice\DiceRoller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

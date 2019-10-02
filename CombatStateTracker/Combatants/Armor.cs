@@ -46,5 +46,16 @@ namespace CombatStateTracker.Combatants
 					{ HitLocations.LegRight, 0},
 				};
 		}
+
+		public override string ToString()
+		{
+			StringBuilder builder = new StringBuilder();
+			builder.AppendLine("\tArmor:");
+			builder.AppendLine($"\t\t{Location2Armor[HitLocations.Head]}");
+			builder.AppendLine($"\t{Location2Armor[HitLocations.ArmLeft]}\t\t{Location2Armor[HitLocations.ArmRight]}");
+			builder.AppendLine($"\t\t{Location2Armor[HitLocations.Body]}");
+			builder.AppendLine($"\t{Location2Armor[HitLocations.LegLeft]}\t\t{Location2Armor[HitLocations.LegRight]}");
+			return builder.ToString();
+		}
 	}
 }
